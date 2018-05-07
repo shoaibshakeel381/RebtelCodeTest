@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{68CDE9D7-6F96-4EB8-87B8-8AD05F3BC4A9}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Rebtel.DataEntities</RootNamespace>
-    <AssemblyName>Rebtel.DataEntities</AssemblyName>
+    <ProjectGuid>{A83A194A-95C8-4E18-A419-68596ADE25F2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Rebtel.Core.Infrastructure</RootNamespace>
+    <AssemblyName>Rebtel.Core.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,12 +31,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Subscription.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

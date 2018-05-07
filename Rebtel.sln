@@ -3,13 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebtel.DataEntities", "Data Access Layer\Rebtel.DataEntities\Rebtel.DataEntities.csproj", "{68CDE9D7-6F96-4EB8-87B8-8AD05F3BC4A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebtel.Business.DataEntities", "Data Access Layer\Rebtel.Business.DataEntities\Rebtel.Business.DataEntities.csproj", "{68CDE9D7-6F96-4EB8-87B8-8AD05F3BC4A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Access Layer", "Data Access Layer", "{34881FD4-0EF2-480D-BAF8-9765A247CBBC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business Layer", "Business Layer", "{C2534B55-CC0C-4912-9841-DE1555F0D45F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebtel.DAL", "Data Access Layer\Rebtel.DAL\Rebtel.DAL.csproj", "{26C32919-E513-4807-B196-B19D9339C2CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebtel.Business.DAL", "Data Access Layer\Rebtel.Business.DAL\Rebtel.Business.DAL.csproj", "{26C32919-E513-4807-B196-B19D9339C2CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebtel.Business.DTOs", "Business Layer\Rebtel.Business.DTOs\Rebtel.Business.DTOs.csproj", "{3A64F49D-6AD3-4998-9189-F37B978ED4D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebtel.Business.Services", "Business Layer\Rebtel.Business.Services\Rebtel.Business.Services.csproj", "{91BD0891-A0BC-4DEC-B8A7-DD82F734BAC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Layer", "Common Layer", "{FCA199AF-D342-4244-93DA-53683E3201A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebtel.Core.Infrastructure", "Common Layer\Rebtel.Core.Infrastructure\Rebtel.Core.Infrastructure.csproj", "{A83A194A-95C8-4E18-A419-68596ADE25F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WCF Hosts", "WCF Hosts", "{98BA89DC-9A6E-4CD0-8227-3EF1A5E00763}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebtel.Business.WCFHost", "WCF Hosts\Rebtel.Business.WCFHost\Rebtel.Business.WCFHost.csproj", "{D31FCB57-CD12-419E-B11E-7D7498BAFC02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +37,22 @@ Global
 		{26C32919-E513-4807-B196-B19D9339C2CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26C32919-E513-4807-B196-B19D9339C2CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26C32919-E513-4807-B196-B19D9339C2CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A64F49D-6AD3-4998-9189-F37B978ED4D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A64F49D-6AD3-4998-9189-F37B978ED4D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A64F49D-6AD3-4998-9189-F37B978ED4D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A64F49D-6AD3-4998-9189-F37B978ED4D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91BD0891-A0BC-4DEC-B8A7-DD82F734BAC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91BD0891-A0BC-4DEC-B8A7-DD82F734BAC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91BD0891-A0BC-4DEC-B8A7-DD82F734BAC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91BD0891-A0BC-4DEC-B8A7-DD82F734BAC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A83A194A-95C8-4E18-A419-68596ADE25F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A83A194A-95C8-4E18-A419-68596ADE25F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A83A194A-95C8-4E18-A419-68596ADE25F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A83A194A-95C8-4E18-A419-68596ADE25F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D31FCB57-CD12-419E-B11E-7D7498BAFC02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D31FCB57-CD12-419E-B11E-7D7498BAFC02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D31FCB57-CD12-419E-B11E-7D7498BAFC02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D31FCB57-CD12-419E-B11E-7D7498BAFC02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +60,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{68CDE9D7-6F96-4EB8-87B8-8AD05F3BC4A9} = {34881FD4-0EF2-480D-BAF8-9765A247CBBC}
 		{26C32919-E513-4807-B196-B19D9339C2CE} = {34881FD4-0EF2-480D-BAF8-9765A247CBBC}
+		{3A64F49D-6AD3-4998-9189-F37B978ED4D5} = {C2534B55-CC0C-4912-9841-DE1555F0D45F}
+		{91BD0891-A0BC-4DEC-B8A7-DD82F734BAC8} = {C2534B55-CC0C-4912-9841-DE1555F0D45F}
+		{A83A194A-95C8-4E18-A419-68596ADE25F2} = {FCA199AF-D342-4244-93DA-53683E3201A8}
+		{D31FCB57-CD12-419E-B11E-7D7498BAFC02} = {98BA89DC-9A6E-4CD0-8227-3EF1A5E00763}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50E56ADD-568A-42D1-A31F-23E77AB35CCC}

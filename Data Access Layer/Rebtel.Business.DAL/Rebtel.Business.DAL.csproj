@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{26C32919-E513-4807-B196-B19D9339C2CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Rebtel.Business.DAL</RootNamespace>
+    <AssemblyName>Rebtel.Business.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Db Infrastructure\AppDbContext.cs" />
+    <Compile Include="Db Scope\AmbientContextSuppressor.cs" />
+    <Compile Include="Db Scope\AmbientDbContextLocator.cs" />
+    <Compile Include="Db Scope\DbContextCollection.cs" />
+    <Compile Include="Db Scope\DbContextScope.cs" />
+    <Compile Include="Db Scope\DbContextScopeFactory.cs" />
+    <Compile Include="Db Scope\DbContextScopeOption.cs" />
+    <Compile Include="Db Scope\Interfaces\IAmbientDbContextLocator.cs" />
+    <Compile Include="Db Scope\Interfaces\IDbContextCollection.cs" />
+    <Compile Include="Db Scope\Interfaces\IDbContextFactory.cs" />
+    <Compile Include="Db Scope\Interfaces\IDbContextReadOnlyScope.cs" />
+    <Compile Include="Db Scope\Interfaces\IDbContextScope.cs" />
+    <Compile Include="Db Scope\Interfaces\IDbContextScopeFactory.cs" />
+    <Compile Include="Entity Configurations\SubscriptionConfiguration.cs" />
+    <Compile Include="Entity Configurations\UserConfiguration.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IGenericRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IRepositoryFactory.cs" />
+    <Compile Include="Repositories\Interfaces\ISubscriptionRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
+    <Compile Include="Repositories\RepositoryFactory.cs" />
+    <Compile Include="Repositories\SubscriptionRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rebtel.Business.DataEntities\Rebtel.Business.DataEntities.csproj">
+      <Project>{68CDE9D7-6F96-4EB8-87B8-8AD05F3BC4A9}</Project>
+      <Name>Rebtel.Business.DataEntities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

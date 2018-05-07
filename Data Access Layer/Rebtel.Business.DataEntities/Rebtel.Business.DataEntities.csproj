@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{26C32919-E513-4807-B196-B19D9339C2CE}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Rebtel.DAL</RootNamespace>
-    <AssemblyName>Rebtel.DAL</AssemblyName>
+    <ProjectGuid>{68CDE9D7-6F96-4EB8-87B8-8AD05F3BC4A9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Rebtel.Business.DataEntities</RootNamespace>
+    <AssemblyName>Rebtel.Business.DataEntities</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,8 +31,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="Subscription.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserSubscription.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
