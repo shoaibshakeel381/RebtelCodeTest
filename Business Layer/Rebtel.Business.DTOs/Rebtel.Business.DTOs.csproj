@@ -39,17 +39,18 @@
     <Compile Include="PropertyMappingConfigurator.cs" />
     <Compile Include="User DTOs\Mappings\UserMappingConfiguration.cs" />
     <Compile Include="User DTOs\Mappings\UserMappingExtensions.cs" />
+    <Compile Include="User DTOs\UserListDTO.cs" />
     <Compile Include="User DTOs\UserDetailDTO.cs" />
     <Compile Include="User DTOs\UserCreateDTO.cs" />
+    <Compile Include="Subscription DTOs\SubscriptionDetailDTO.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Subscription DTOs\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="Mapster, Version=3.1.8.0, Culture=neutral, PublicKeyToken=2f39883af23c29a8, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Mapster.3.1.8\lib\net45\Mapster.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

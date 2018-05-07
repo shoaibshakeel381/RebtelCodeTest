@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 using Rebtel.Business.DataEntities;
 
 namespace Rebtel.Business.DAL.EntityConfigurations
 {
-    class SubscriptionConfiguration : EntityTypeConfiguration<Subscription>
+    class SubscriptionConfiguration : EntityTypeConfiguration<SubscriptionEntity>
     {
         public SubscriptionConfiguration()
         {

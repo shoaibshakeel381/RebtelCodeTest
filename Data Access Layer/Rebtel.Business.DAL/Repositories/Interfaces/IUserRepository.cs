@@ -2,7 +2,7 @@
 
 namespace Rebtel.Business.DAL.Repositories
 {
-    public interface IUserRepository : IGenericRepository<User>
+    public interface IUserRepository : IGenericRepository<UserEntity>
     {
     }
 }

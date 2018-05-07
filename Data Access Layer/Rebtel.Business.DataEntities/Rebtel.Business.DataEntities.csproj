@@ -35,9 +35,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Subscription.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserSubscription.cs" />
+    <Compile Include="SubscriptionEntity.cs" />
+    <Compile Include="UserEntity.cs" />
+    <Compile Include="UserSubscriptionEntity.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -24,27 +24,27 @@ namespace Rebtel.Business.Services
         }
         #endregion
 
-        public IEnumerable<Subscription> GetAll()
+        public IEnumerable<SubscriptionEntity> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Subscription Get(int id)
+        public SubscriptionEntity Get(string id)
         {
             throw new NotImplementedException();
         }
 
-        public int Create(Subscription subscription)
+        public string Create(SubscriptionEntity subscription)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(Subscription subscription)
+        public string Update(SubscriptionEntity subscription)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(int id)
+        public bool Delete(string id)
         {
             using (var dbContextScrope = _dbContextScopeFactory.Create())
             {

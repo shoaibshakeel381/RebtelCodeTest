@@ -64,6 +64,7 @@
     <Compile Include="Db Scope\Interfaces\IDbContextScopeFactory.cs" />
     <Compile Include="Entity Configurations\SubscriptionConfiguration.cs" />
     <Compile Include="Entity Configurations\UserConfiguration.cs" />
+    <Compile Include="Entity Configurations\UserSubscriptionConfiguration.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\Interfaces\IGenericRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRepositoryFactory.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
@@ -95,6 +96,44 @@ namespace Rebtel.Business.DAL.Repositories
         public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
             return DbContext.Set<TEntity>().SingleOrDefault(predicate);
+        }
+
+        /// <summary>
+        /// Returns the only element of a sequence that satisfies a specified condition
+        /// or a default value if no such element exists; this method throws an exception
+        /// if more than one element satisfies the condition.
+        /// </summary>
+        /// <param name="predicate">A function to test an element for a condition.</param>
+        /// <param name="includes">List of Properties to Include.</param>
+        /// <exception cref="System.ArgumentNullException">Db collection or predicate is null</exception>
+        /// <exception cref="System.InvalidOperationException">More than one element satisfies the 
+        /// condition in predicate</exception>
+        /// <returns>The single element of the input sequence that satisfies the condition in
+        /// predicate, or default(TSource) if no such element is found.</returns>
+        public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate, IEnumerable<string> includes)
+        {
+            IQueryable<TEntity> sequence = DbContext.Set<TEntity>();
+            
+            // handle Includes
+            if (includes != null)
+            {
+                foreach (var includeProperty in includes)
+                {
+                    sequence = sequence.Include(includeProperty);
+                }
+            }
+
+            return sequence.SingleOrDefault(predicate);
+        }
+
+        /// <summary>
+        /// Return all Records
+        /// </summary>
+        /// <exception cref="System.ArgumentNullException">No records found</exception>
+        /// <returns></returns>
+        public virtual IEnumerable<TEntity> GetAll()
+        {
+            return DbContext.Set<TEntity>().ToList();
         }
         #endregion
 

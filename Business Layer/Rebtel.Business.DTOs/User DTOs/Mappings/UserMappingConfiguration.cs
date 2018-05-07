@@ -7,9 +7,9 @@ namespace Rebtel.Business.DTOs.UserDTOs.Mappings
     {
         public void Configuration()
         {
-            TypeAdapterConfig<UserCreateDTO, User>.NewConfig();
+            TypeAdapterConfig<UserCreateDTO, UserEntity>.NewConfig();
 
-            TypeAdapterConfig<User, UserDetailDTO>.NewConfig();
+            TypeAdapterConfig<UserEntity, UserDetailDTO>.NewConfig();
         }
     }
 }

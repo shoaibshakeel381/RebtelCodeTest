@@ -2,9 +2,9 @@
 
 namespace Rebtel.Business.DataEntities
 {
-    public class Subscription
+    public class SubscriptionEntity
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
@@ -14,6 +14,6 @@ namespace Rebtel.Business.DataEntities
 
         public int CallMinutes { get; set; }
 
-        public virtual ICollection<UserSubscription> UserSubscriptions { get; set; }
+        public virtual ICollection<UserSubscriptionEntity> UserSubscriptions { get; set; }
     }
 }

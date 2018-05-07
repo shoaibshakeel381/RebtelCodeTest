@@ -8,18 +8,18 @@ namespace Rebtel.Business.Services.ServiceContracts
     public interface IUserService
     {
         [OperationContract]
-        IEnumerable<UserDetailDTO> GetAll();
+        IEnumerable<UserListDTO> GetAll();
 
         [OperationContract]
-        UserDetailDTO Get(int id);
+        UserDetailDTO Get(string id);
 
         [OperationContract]
-        int Create(UserCreateDTO user);
+        string Create(UserCreateDTO user);
 
         [OperationContract]
-        bool Subscribe(int userId, int subscriptionId);
+        bool Subscribe(string userId, string subscriptionId);
 
         [OperationContract]
-        bool Delete(int id);
+        bool Delete(string id);
     }
 }

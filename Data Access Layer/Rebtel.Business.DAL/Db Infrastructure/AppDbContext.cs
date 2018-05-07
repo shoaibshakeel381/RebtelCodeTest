@@ -8,9 +8,9 @@ namespace Rebtel.Business.DAL.DbInfrastructure
     public class AppDbContext : DbContext
     {
         #region DbSets
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserEntity> Users { get; set; }
 
-        public virtual DbSet<Subscription> Subscriptions { get; set; }
+        public virtual DbSet<SubscriptionEntity> Subscriptions { get; set; }
         #endregion
 
         /**
@@ -28,6 +28,7 @@ namespace Rebtel.Business.DAL.DbInfrastructure
             // Add Model Configurations
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new SubscriptionConfiguration());
+            modelBuilder.Configurations.Add(new UserSubscriptionConfiguration());
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Rebtel.Business.DAL.Repositories
 {
-    public interface ISubscriptionRepository : IGenericRepository<Subscription>
+    public interface ISubscriptionRepository : IGenericRepository<SubscriptionEntity>
     {
     }
 }

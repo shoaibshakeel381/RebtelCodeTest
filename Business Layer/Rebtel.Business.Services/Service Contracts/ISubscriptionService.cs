@@ -8,18 +8,18 @@ namespace Rebtel.Business.Services.ServiceContracts
     public interface ISubscriptionService
     {
         [OperationContract]
-        IEnumerable<Subscription> GetAll();
+        IEnumerable<SubscriptionEntity> GetAll();
 
         [OperationContract]
-        Subscription Get(int id);
+        SubscriptionEntity Get(string id);
 
         [OperationContract]
-        int Create(Subscription subscription);
+        string Create(SubscriptionEntity subscription);
 
         [OperationContract]
-        int Update(Subscription subscription);
+        string Update(SubscriptionEntity subscription);
 
         [OperationContract]
-        bool Delete(int id);
+        bool Delete(string id);
     }
 }
