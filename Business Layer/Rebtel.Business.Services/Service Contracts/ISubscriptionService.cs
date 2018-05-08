@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using Rebtel.Business.DataEntities;
+using Rebtel.Business.DTOs;
 
 namespace Rebtel.Business.Services.ServiceContracts
 {
@@ -8,16 +8,16 @@ namespace Rebtel.Business.Services.ServiceContracts
     public interface ISubscriptionService
     {
         [OperationContract]
-        IEnumerable<SubscriptionEntity> GetAll();
+        IEnumerable<SubscriptionListDTO> GetAll();
 
         [OperationContract]
-        SubscriptionEntity Get(string id);
+        SubscriptionDetailDTO Get(string id);
 
         [OperationContract]
-        string Create(SubscriptionEntity subscription);
+        string Create(SubscriptionCreateDTO subscription);
 
         [OperationContract]
-        string Update(SubscriptionEntity subscription);
+        string Update(SubscriptionUpdateDTO subscription);
 
         [OperationContract]
         bool Delete(string id);

@@ -2,7 +2,7 @@
 using Mapster;
 using Rebtel.Business.DataEntities;
 
-namespace Rebtel.Business.DTOs.User_DTOs.Mappings
+namespace Rebtel.Business.DTOs
 {
     public static class UserMappingExtensions
     {

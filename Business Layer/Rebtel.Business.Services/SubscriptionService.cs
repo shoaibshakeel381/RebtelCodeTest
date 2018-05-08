@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Rebtel.Business.DataEntities;
 using Rebtel.Business.DAL.Infrastructure;
 using Rebtel.Business.DAL.Repositories;
+using Rebtel.Business.DTOs;
 using Rebtel.Business.Services.ServiceContracts;
 
 namespace Rebtel.Business.Services
@@ -24,24 +24,67 @@ namespace Rebtel.Business.Services
         }
         #endregion
 
-        public IEnumerable<SubscriptionEntity> GetAll()
+        public IEnumerable<SubscriptionListDTO> GetAll()
         {
-            throw new NotImplementedException();
+            // Processing Phase
+            using (_dbContextScopeFactory.Create())
+            {
+                var result = _repositoryFactory.Get<ISubscriptionRepository>().GetAll();
+
+                // Mapping Phase
+                return result.ToListDTO();
+            }
         }
 
-        public SubscriptionEntity Get(string id)
+        public SubscriptionDetailDTO Get(string id)
         {
-            throw new NotImplementedException();
+            // Processing Phase
+            using (_dbContextScopeFactory.Create())
+            {
+                var result = _repositoryFactory.Get<ISubscriptionRepository>().SingleOrDefault(a => a.Id == id);
+                if (result == null)
+                {
+                    throw new NotFoundException("Subscription with provided id was not found.");
+                }
+
+                // Mapping Phase
+                return result.ToDetailsDTO();
+            }
         }
 
-        public string Create(SubscriptionEntity subscription)
+        public string Create(SubscriptionCreateDTO subscription)
         {
-            throw new NotImplementedException();
+            var result = subscription.ToDomainEntity();
+
+            // Processing Phase
+            using (var dbContextScope = _dbContextScopeFactory.Create())
+            {
+                _repositoryFactory.Get<ISubscriptionRepository>().Create(result);
+                dbContextScope.SaveChanges();
+            }
+
+            return result.Id;
         }
 
-        public string Update(SubscriptionEntity subscription)
+        public string Update(SubscriptionUpdateDTO subscription)
         {
-            throw new NotImplementedException();
+            // Processing Phase
+            using (var dbContextScope = _dbContextScopeFactory.Create())
+            {
+                var result = _repositoryFactory.Get<ISubscriptionRepository>().SingleOrDefault(a => a.Id == subscription.Id);
+                if (result == null)
+                {
+                    throw new NotFoundException("Subscription with provided id was not found.");
+                }
+
+                // Mapping Phase
+                subscription.ToDomainEntity(result);
+
+                _repositoryFactory.Get<ISubscriptionRepository>().Update(result);
+                dbContextScope.SaveChanges();
+            }
+
+            return subscription.Id;
         }
 
         public bool Delete(string id)

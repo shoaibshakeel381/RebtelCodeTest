@@ -1,24 +1,33 @@
-﻿using Castle.MicroKernel.Registration;
-using Castle.MicroKernel.SubSystems.Configuration;
-using Castle.Windsor;
-using Rebtel.Business.DAL.Infrastructure;
+﻿using Rebtel.Business.DAL.Infrastructure;
 using Rebtel.Business.DAL.Repositories;
 using Rebtel.Business.Services;
 using Rebtel.Business.Services.ServiceContracts;
+using SimpleInjector;
+using SimpleInjector.Integration.Wcf;
 
 namespace Rebtel.Business.WCFHost
 {
-    public class DIConfig : IWindsorInstaller
+    public static class DIConfig
     {
-        public void Install(IWindsorContainer container, IConfigurationStore store)
+
+        public static void Install()
         {
-            container.Register(
-                Component.For<IDbContextScopeFactory, DbContextScopeFactory>(),
-                Component.For<IAmbientDbContextLocator, AmbientDbContextLocator>(),
-                Component.For<IRepositoryFactory, RepositoryFactory>(),
-                Component.For<IUserService, UserService>(),
-                Component.For<ISubscriptionService, SubscriptionService>()
-            );
+            //
+            // Create a new Simple Injector container
+            var container = new Container();
+
+            //
+            // Register 
+            container.Register(typeof(IDbContextScopeFactory), () => new DbContextScopeFactory());
+            container.Register<IAmbientDbContextLocator, AmbientDbContextLocator>();
+            container.Register<IRepositoryFactory, RepositoryFactory>();
+            container.Register<IUserService, UserService>();
+            container.Register<ISubscriptionService, SubscriptionService>();
+
+            //
+            // 4. Register container as default DependencyResolver
+            // Register the container to the SimpleInjectorServiceHostFactory.
+            SimpleInjectorServiceHostFactory.SetContainer(container);
         }
     }
 }

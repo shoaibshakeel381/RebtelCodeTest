@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Rebtel.Business.DAL.Infrastructure;
 using Rebtel.Business.DAL.Repositories;
 using Rebtel.Business.DTOs;
-using Rebtel.Business.DTOs.User_DTOs.Mappings;
 using Rebtel.Business.Services.ServiceContracts;
 
 namespace Rebtel.Business.Services
@@ -42,14 +42,22 @@ namespace Rebtel.Business.Services
             // Processing Phase
             using (_dbContextScopeFactory.Create())
             {
-                var result = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(a => a.Id == id);
+                var result = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(a => a.Id == id, new List<string> { "UserSubscriptions", "UserSubscriptions.Subscription" });
                 if (result == null)
                 {
                     throw new NotFoundException("User with provided id was not found.");
                 }
                 
                 // Mapping Phase
-                return result.ToDetailsDTO();
+                var userDetailDTO = result.ToDetailsDTO();
+                var subscriptions = new List<UserSubscriptionDetailDTO>();
+                foreach (var userSubscription in result.UserSubscriptions)
+                {
+                    subscriptions.Add(userSubscription.Subscription.ToUserSubscriptionDetailDTO());
+                }
+
+                userDetailDTO.Subscriptions = subscriptions;
+                return userDetailDTO;
             }
         }
 
@@ -67,7 +75,29 @@ namespace Rebtel.Business.Services
 
         public bool Subscribe(string userId, string subscriptionId)
         {
-            throw new NotImplementedException();
+            using (var dbContextScrope = _dbContextScopeFactory.Create())
+            {
+                var user = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(a => a.Id == userId, new List<string> { "UserSubscriptions" });
+                if (user == null)
+                {
+                    throw new NotFoundException("User with provided id was not found.");
+                }
+
+                var subscription = _repositoryFactory.Get<ISubscriptionRepository>().SingleOrDefault(a => a.Id == subscriptionId);
+                if (subscription == null)
+                {
+                    throw new NotFoundException("Subscription with provided id was not found.");
+                }
+
+                if (!user.UserSubscriptions.Any(a => a.UserId == userId && a.SubscriptionId == subscriptionId))
+                {
+                    _repositoryFactory.Get<IUserRepository>().AddUserSubscription(user, subscription);
+                }
+
+                dbContextScrope.SaveChanges();
+            }
+
+            return true;
         }
 
         public bool Delete(string id)

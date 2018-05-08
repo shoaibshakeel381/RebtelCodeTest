@@ -4,7 +4,7 @@
     {
         public string UserId { get; set; }
 
-        public UserEntity UserEntity { get; set; }
+        public UserEntity User { get; set; }
 
         public string SubscriptionId { get; set; }
 

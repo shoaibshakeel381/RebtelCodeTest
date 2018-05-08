@@ -66,7 +66,7 @@
       <Name>Rebtel.Business.DataEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Rebtel.Business.DTOs\Rebtel.Business.DTOs.csproj">
-      <Project>{3A64F49D-6AD3-4998-9189-F37B978ED4D5}</Project>
+      <Project>{ff636d59-2cd5-45f2-8b6b-558d7518b644}</Project>
       <Name>Rebtel.Business.DTOs</Name>
     </ProjectReference>
   </ItemGroup>

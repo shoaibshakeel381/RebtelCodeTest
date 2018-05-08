@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3A64F49D-6AD3-4998-9189-F37B978ED4D5}</ProjectGuid>
+    <ProjectGuid>{FF636D59-2CD5-45F2-8B6B-558D7518B644}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Rebtel.Business.DTOs</RootNamespace>
     <AssemblyName>Rebtel.Business.DTOs</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,26 +29,37 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="IPropertyMappingConfiguration.cs" />
-    <Compile Include="PropertyMappingConfigurator.cs" />
-    <Compile Include="User DTOs\Mappings\UserMappingConfiguration.cs" />
-    <Compile Include="User DTOs\Mappings\UserMappingExtensions.cs" />
-    <Compile Include="User DTOs\UserListDTO.cs" />
-    <Compile Include="User DTOs\UserDetailDTO.cs" />
-    <Compile Include="User DTOs\UserCreateDTO.cs" />
-    <Compile Include="Subscription DTOs\SubscriptionDetailDTO.cs" />
-  </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Reference Include="Mapster, Version=3.1.8.0, Culture=neutral, PublicKeyToken=2f39883af23c29a8, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Mapster.3.1.8\lib\net45\Mapster.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyMappings\IPropertyMappingConfiguration.cs" />
+    <Compile Include="PropertyMappings\PropertyMappingConfigurator.cs" />
+    <Compile Include="PropertyMappings\Subscription\SubscriptionConfiguration.cs" />
+    <Compile Include="PropertyMappings\Subscription\SubscriptionExtensions.cs" />
+    <Compile Include="PropertyMappings\User\UserConfiguration.cs" />
+    <Compile Include="PropertyMappings\User\UserMappingExtensions.cs" />
+    <Compile Include="Subscription DTOs\SubscriptionCreateDTO.cs" />
+    <Compile Include="Subscription DTOs\SubscriptionDetailDTO.cs" />
+    <Compile Include="Subscription DTOs\SubscriptionListDTO.cs" />
+    <Compile Include="Subscription DTOs\SubscriptionUpdateDTO.cs" />
+    <Compile Include="User DTOs\UserCreateDTO.cs" />
+    <Compile Include="User DTOs\UserDetailDTO.cs" />
+    <Compile Include="User DTOs\UserListDTO.cs" />
+    <Compile Include="User DTOs\UserSubscriptionDetailDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

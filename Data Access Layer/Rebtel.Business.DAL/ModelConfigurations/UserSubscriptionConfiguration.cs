@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using Rebtel.Business.DataEntities;
 
-namespace Rebtel.Business.DAL.EntityConfigurations
+namespace Rebtel.Business.DAL.ModelConfigurations
 {
     class UserSubscriptionConfiguration : EntityTypeConfiguration<UserSubscriptionEntity>
     {
@@ -10,7 +10,7 @@ namespace Rebtel.Business.DAL.EntityConfigurations
             ToTable("UserSubscription");
             HasKey(a => new {a.UserId, a.SubscriptionId});
 
-            HasRequired(a => a.UserEntity)
+            HasRequired(a => a.User)
                 .WithMany(a => a.UserSubscriptions)
                 .HasForeignKey(a => a.UserId);
 

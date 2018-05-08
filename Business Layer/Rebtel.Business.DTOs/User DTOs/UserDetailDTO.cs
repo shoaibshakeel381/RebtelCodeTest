@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Rebtel.Business.DTOs
 {
     [DataContract]
-    public class UserDetailDTO
+    public class UserDetailDTO : IExtensibleDataObject
     {
         [DataMember]
         public string Id { get; set; }
@@ -20,19 +20,13 @@ namespace Rebtel.Business.DTOs
         public string Email { get; set; }
 
         [DataMember]
-        public double TotalPriceIncVatAmount => Subscriptions.Sum(subscription => subscription.PriceIncVat);
-
-        [DataMember]
-        public double TotalCallMinutes => Subscriptions.Sum(subscription => subscription.CallMinutes);
-
-        [DataMember]
-        public IEnumerable<SubscriptionDetailDTO> Subscriptions { get; set; }
+        public IEnumerable<UserSubscriptionDetailDTO> Subscriptions { get; set; }
 
         public ExtensionDataObject ExtensionData { get; set; }
 
         public UserDetailDTO()
         {
-            Subscriptions = new List<SubscriptionDetailDTO>();
+            Subscriptions = new List<UserSubscriptionDetailDTO>();
         }
     }
 }

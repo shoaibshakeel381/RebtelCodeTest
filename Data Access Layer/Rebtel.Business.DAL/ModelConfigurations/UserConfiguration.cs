@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using Rebtel.Business.DataEntities;
 
-namespace Rebtel.Business.DAL.EntityConfigurations
+namespace Rebtel.Business.DAL.ModelConfigurations
 {
     class UserConfiguration : EntityTypeConfiguration<UserEntity>
     {

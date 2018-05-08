@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Db Infrastructure\AppDbContext.cs" />
+    <Compile Include="Db Infrastructure\AppDbInitializer.cs" />
     <Compile Include="Db Scope\AmbientContextSuppressor.cs" />
     <Compile Include="Db Scope\AmbientDbContextLocator.cs" />
     <Compile Include="Db Scope\DbContextCollection.cs" />
@@ -62,9 +63,9 @@
     <Compile Include="Db Scope\Interfaces\IDbContextReadOnlyScope.cs" />
     <Compile Include="Db Scope\Interfaces\IDbContextScope.cs" />
     <Compile Include="Db Scope\Interfaces\IDbContextScopeFactory.cs" />
-    <Compile Include="Entity Configurations\SubscriptionConfiguration.cs" />
-    <Compile Include="Entity Configurations\UserConfiguration.cs" />
-    <Compile Include="Entity Configurations\UserSubscriptionConfiguration.cs" />
+    <Compile Include="ModelConfigurations\SubscriptionConfiguration.cs" />
+    <Compile Include="ModelConfigurations\UserConfiguration.cs" />
+    <Compile Include="ModelConfigurations\UserSubscriptionConfiguration.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\Interfaces\IGenericRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRepositoryFactory.cs" />
