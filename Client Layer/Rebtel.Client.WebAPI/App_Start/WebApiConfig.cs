@@ -1,4 +1,6 @@
 ﻿using System.Web.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Rebtel.Client.WebAPI
 {
@@ -16,6 +18,11 @@ namespace Rebtel.Client.WebAPI
             //    routeTemplate: "api/{controller}/{id}",
             //    defaults: new { id = RouteParameter.Optional }
             //);
+
+            // Configure web api to camel case outgoing JSON
+            var settings = config.Formatters.JsonFormatter.SerializerSettings;
+            settings.Formatting = Formatting.Indented;
+            settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
     }
 }

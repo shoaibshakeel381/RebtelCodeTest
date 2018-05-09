@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebtel.Client.WebAPI", "Cli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebtel.Business.DTOs", "Business Layer\Rebtel.Business.DTOs\Rebtel.Business.DTOs.csproj", "{FF636D59-2CD5-45F2-8B6B-558D7518B644}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests Layer", "Tests Layer", "{CE4FEF41-8FB2-4323-A682-120DDBD70D87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebtel.Tests", "Tests Layer\Rebtel.Tests\Rebtel.Tests.csproj", "{96537A25-D7DC-409C-82A1-D5577151B114}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +83,10 @@ Global
 		{FF636D59-2CD5-45F2-8B6B-558D7518B644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF636D59-2CD5-45F2-8B6B-558D7518B644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF636D59-2CD5-45F2-8B6B-558D7518B644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96537A25-D7DC-409C-82A1-D5577151B114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96537A25-D7DC-409C-82A1-D5577151B114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96537A25-D7DC-409C-82A1-D5577151B114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96537A25-D7DC-409C-82A1-D5577151B114}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +102,7 @@ Global
 		{57B55455-B8AA-4ECA-9060-15DBCFF5E6D7} = {5B23FB28-F9E8-43BB-B0C9-815C761F23AB}
 		{2BE1FA47-94C2-4E6E-8B9C-94648556F627} = {5B23FB28-F9E8-43BB-B0C9-815C761F23AB}
 		{FF636D59-2CD5-45F2-8B6B-558D7518B644} = {C2534B55-CC0C-4912-9841-DE1555F0D45F}
+		{96537A25-D7DC-409C-82A1-D5577151B114} = {CE4FEF41-8FB2-4323-A682-120DDBD70D87}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50E56ADD-568A-42D1-A31F-23E77AB35CCC}
