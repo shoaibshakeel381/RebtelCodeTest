@@ -22,13 +22,12 @@ namespace Rebtel.Business.DAL.Infrastructure
     {
         private readonly Dictionary<DbContext, DbContextTransaction> _transactions; 
         private IsolationLevel? _isolationLevel;
-        private readonly IDbContextFactory _dbContextFactory;
         private bool _disposed;
         private bool _completed;
 
         internal Dictionary<Type, DbContext> InitializedDbContexts { get; }
 
-        public DbContextCollection(IsolationLevel? isolationLevel = null, IDbContextFactory dbContextFactory = null)
+        public DbContextCollection(IsolationLevel? isolationLevel = null)
         {
             _disposed = false;
             _completed = false;
@@ -37,7 +36,6 @@ namespace Rebtel.Business.DAL.Infrastructure
             _transactions = new Dictionary<DbContext, DbContextTransaction>();
             
             _isolationLevel = isolationLevel;
-            _dbContextFactory = dbContextFactory;
         }
 
         public TDbContext Get<TDbContext>() where TDbContext : DbContext
@@ -51,9 +49,7 @@ namespace Rebtel.Business.DAL.Infrastructure
             {
                 // First time we've been asked for this particular DbContext type.
                 // Create one, cache it and start its database transaction if needed.
-                var dbContext = _dbContextFactory != null
-                    ? _dbContextFactory.CreateDbContext<TDbContext>()
-                    : Activator.CreateInstance<TDbContext>();
+                var dbContext = Activator.CreateInstance<TDbContext>();
 
                 InitializedDbContexts.Add(requestedType, dbContext);
                 

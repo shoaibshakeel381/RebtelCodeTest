@@ -59,8 +59,6 @@
     <Compile Include="Db Scope\DbContextScopeOption.cs" />
     <Compile Include="Db Scope\Interfaces\IAmbientDbContextLocator.cs" />
     <Compile Include="Db Scope\Interfaces\IDbContextCollection.cs" />
-    <Compile Include="Db Scope\Interfaces\IDbContextFactory.cs" />
-    <Compile Include="Db Scope\Interfaces\IDbContextReadOnlyScope.cs" />
     <Compile Include="Db Scope\Interfaces\IDbContextScope.cs" />
     <Compile Include="Db Scope\Interfaces\IDbContextScopeFactory.cs" />
     <Compile Include="ModelConfigurations\SubscriptionConfiguration.cs" />

@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using Rebtel.Business.DAL.Infrastructure;
+﻿using Rebtel.Business.DAL.Infrastructure;
 using Rebtel.Business.DAL.Repositories;
 using Rebtel.Business.Services;
 using Rebtel.Business.Services.ServiceContracts;
@@ -8,14 +7,14 @@ namespace Rebtel.Tests
 {
     public class Bootstraper
     {
-        public static ISubscriptionService GetSubsriptionService(DbContext dbContext)
+        public static ISubscriptionService GetSubsriptionService()
         {
-            return new SubscriptionService(GetRepositoryFactory(), GetDbContextScopeFactory(dbContext));
+            return new SubscriptionService(GetRepositoryFactory(), GetDbContextScopeFactory());
         }
 
-        public static IUserService GetUserService(DbContext dbContext)
+        public static IUserService GetUserService()
         {
-            return new UserService(GetRepositoryFactory(), GetDbContextScopeFactory(dbContext));
+            return new UserService(GetRepositoryFactory(), GetDbContextScopeFactory());
         }
 
         public static IRepositoryFactory GetRepositoryFactory()
@@ -28,24 +27,9 @@ namespace Rebtel.Tests
             return new AmbientDbContextLocator();
         }
 
-        public static IDbContextScopeFactory GetDbContextScopeFactory(DbContext dbContext)
+        public static IDbContextScopeFactory GetDbContextScopeFactory()
         {
-            return new DbContextScopeFactory(new DbContextFactory(dbContext));
-        }
-
-        public class DbContextFactory : IDbContextFactory
-        {
-            private readonly DbContext _context;
-
-            public DbContextFactory(DbContext context)
-            {
-                _context = context;
-            }
-
-            public TDbContext CreateDbContext<TDbContext>() where TDbContext : DbContext
-            {
-                return _context as TDbContext;
-            }
+            return new DbContextScopeFactory();
         }
     }
 }

@@ -20,11 +20,11 @@ namespace Rebtel.Business.DAL.Infrastructure
 
         public IDbContextCollection DbContexts => _dbContexts;
 
-        public DbContextScope(IDbContextFactory dbContextFactory = null) :
-            this(joiningOption: DbContextScopeOption.JoinExisting, isolationLevel: null, dbContextFactory: dbContextFactory)
+        public DbContextScope() :
+            this(joiningOption: DbContextScopeOption.JoinExisting, isolationLevel: null)
         {}
 
-        public DbContextScope(DbContextScopeOption joiningOption, IsolationLevel? isolationLevel, IDbContextFactory dbContextFactory = null)
+        public DbContextScope(DbContextScopeOption joiningOption, IsolationLevel? isolationLevel)
         {
             if (isolationLevel.HasValue && joiningOption == DbContextScopeOption.JoinExisting)
                 throw new ArgumentException("Cannot join an ambient DbContextScope when an explicit database transaction is required. When requiring explicit database transactions to be used (i.e. when the 'isolationLevel' parameter is set), you must not also ask to join the ambient context (i.e. the 'joinAmbient' parameter must be set to false).");
@@ -41,7 +41,7 @@ namespace Rebtel.Business.DAL.Infrastructure
             else
             {
                 _nested = false;
-                _dbContexts = new DbContextCollection(isolationLevel, dbContextFactory);
+                _dbContexts = new DbContextCollection(isolationLevel);
             }
 
             SetAmbientScope(this);
