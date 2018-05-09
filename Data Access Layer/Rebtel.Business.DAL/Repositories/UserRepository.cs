@@ -12,6 +12,12 @@ namespace Rebtel.Business.DAL.Repositories
             
         }
 
+        public override void Create(UserEntity entity)
+        {
+            entity.Id = Guid.NewGuid().ToString();
+            base.Create(entity);
+        }
+
         public void AddUserSubscription(UserEntity user, SubscriptionEntity subscription)
         {
             user.UserSubscriptions.Add(new UserSubscriptionEntity
