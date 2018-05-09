@@ -35,7 +35,13 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="EnumExtensions.cs" />
+    <Compile Include="Exceptions\DbValidationException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
+    <Compile Include="ResultCode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

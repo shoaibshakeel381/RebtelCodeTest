@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Http;
 using Rebtel.Client.Entities;
 using Rebtel.Client.ServiceContracts;
@@ -7,7 +6,7 @@ using Rebtel.Client.ServiceContracts;
 namespace Rebtel.Client.WebAPI.Controllers
 {
     [RoutePrefix("api/users")]
-    public class UserController : ApiController
+    public class UserController : BaseController
     {
         private readonly IUserService _userService;
 
@@ -18,36 +17,71 @@ namespace Rebtel.Client.WebAPI.Controllers
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<UserListDTO> Get()
+        public IHttpActionResult Get()
         {
-            return _userService.GetAll();
+            try
+            {
+                return Ok(_userService.GetAll());
+            }
+            catch (Exception e)
+            {
+                return GetExceptionResponse(e);
+            }
         }
 
         [HttpGet]
         [Route("{id}")]
-        public UserDetailDTO Get(string id)
+        public IHttpActionResult Get(string id)
         {
-            return _userService.Get(id);
+            try
+            {
+                return Ok(_userService.Get(id));
+            }
+            catch (Exception e)
+            {
+                return GetExceptionResponse(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("{userId}/{subscriptionId}")]
+        public IHttpActionResult Get(string userId, string subscriptionId)
+        {
+            try
+            {
+                return Ok(_userService.Subscribe(userId, subscriptionId));
+            }
+            catch (Exception e)
+            {
+                return GetExceptionResponse(e);
+            }
         }
 
         [HttpPost]
         [Route("")]
-        public string Post([FromBody]UserCreateDTO user)
+        public IHttpActionResult Post([FromBody]UserCreateDTO user)
         {
-            return _userService.Create(user);
+            try
+            {
+                return Ok(_userService.Create(user));
+            }
+            catch (Exception e)
+            {
+                return GetExceptionResponse(e);
+            }
         }
 
         [HttpDelete, Route("{id}")]
-        public void Delete(string id)
+        public IHttpActionResult Delete(string id)
         {
-            _userService.Delete(id);
-        }
-        
-        [HttpGet]
-        [Route("{userId}/{subscriptionId}")]
-        public void Get(string userId, string subscriptionId)
-        {
-            _userService.Subscribe(userId, subscriptionId);
+            try
+            {
+                return Ok(_userService.Delete(id));
+            }
+            catch (Exception e)
+            {
+                return GetExceptionResponse(e);
+            }
         }
     }
 }

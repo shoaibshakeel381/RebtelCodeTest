@@ -8,7 +8,7 @@ using Rebtel.Business.Services.ServiceContracts;
 
 namespace Rebtel.Business.Services
 {
-    public class UserService : IUserService
+    public class UserService : BaseService, IUserService
     {
         #region Private Fields
         private readonly IRepositoryFactory _repositoryFactory;
@@ -28,93 +28,128 @@ namespace Rebtel.Business.Services
         public IEnumerable<UserListDTO> GetAll()
         {
             // Processing Phase
-            using (_dbContextScopeFactory.Create())
+            try
             {
-                var result = _repositoryFactory.Get<IUserRepository>().GetAll();
+                using (_dbContextScopeFactory.Create())
+                {
+                    var result = _repositoryFactory.Get<IUserRepository>().GetAll();
 
-                // Mapping Phase
-                return result.ToListDTO();
+                    // Mapping Phase
+                    return result.ToListDTO();
+                }
+            }
+            catch (Exception e)
+            {
+                throw GetExceptionResponse(e);
             }
         }
 
         public UserDetailDTO Get(string id)
         {
             // Processing Phase
-            using (_dbContextScopeFactory.Create())
+            try
             {
-                var result = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(a => a.Id == id, new List<string> { "UserSubscriptions", "UserSubscriptions.Subscription" });
-                if (result == null)
+                using (_dbContextScopeFactory.Create())
                 {
-                    throw new NotFoundException("User with provided id was not found.");
-                }
+                    var result = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(a => a.Id == id, new List<string> { "UserSubscriptions", "UserSubscriptions.Subscription" });
+                    if (result == null)
+                    {
+                        throw new NotFoundException("User with provided id was not found.");
+                    }
                 
-                // Mapping Phase
-                var userDetailDTO = result.ToDetailsDTO();
-                var subscriptions = new List<UserSubscriptionDetailDTO>();
-                foreach (var userSubscription in result.UserSubscriptions)
-                {
-                    subscriptions.Add(userSubscription.Subscription.ToUserSubscriptionDetailDTO());
-                }
+                    // Mapping Phase
+                    var userDetailDTO = result.ToDetailsDTO();
+                    var subscriptions = new List<UserSubscriptionDetailDTO>();
+                    foreach (var userSubscription in result.UserSubscriptions)
+                    {
+                        subscriptions.Add(userSubscription.Subscription.ToUserSubscriptionDetailDTO());
+                    }
 
-                userDetailDTO.Subscriptions = subscriptions;
-                return userDetailDTO;
+                    userDetailDTO.Subscriptions = subscriptions;
+                    return userDetailDTO;
+                }
+            }
+            catch (Exception e)
+            {
+                throw GetExceptionResponse(e);
             }
         }
 
         public string Create(UserCreateDTO user)
         {
-            var result = user.ToDomainEntity();
-            using (var dbContextScope = _dbContextScopeFactory.Create())
+            try
             {
-                _repositoryFactory.Get<IUserRepository>().Create(result);
-                dbContextScope.SaveChanges();
-            }
+                var result = user.ToDomainEntity();
+                using (var dbContextScope = _dbContextScopeFactory.Create())
+                {
+                    _repositoryFactory.Get<IUserRepository>().Create(result);
+                    dbContextScope.SaveChanges();
+                }
 
-            return result.Id;
+                return result.Id;
+            }
+            catch (Exception e)
+            {
+                throw GetExceptionResponse(e);
+            }
         }
 
         public bool Subscribe(string userId, string subscriptionId)
         {
-            using (var dbContextScrope = _dbContextScopeFactory.Create())
+            try
             {
-                var user = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(a => a.Id == userId, new List<string> { "UserSubscriptions" });
-                if (user == null)
+                using (var dbContextScrope = _dbContextScopeFactory.Create())
                 {
-                    throw new NotFoundException("User with provided id was not found.");
+                    var user = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(a => a.Id == userId, new List<string> { "UserSubscriptions" });
+                    if (user == null)
+                    {
+                        throw new NotFoundException("User with provided id was not found.");
+                    }
+
+                    var subscription = _repositoryFactory.Get<ISubscriptionRepository>().SingleOrDefault(a => a.Id == subscriptionId);
+                    if (subscription == null)
+                    {
+                        throw new NotFoundException("Subscription with provided id was not found.");
+                    }
+
+                    if (!user.UserSubscriptions.Any(a => a.UserId == userId && a.SubscriptionId == subscriptionId))
+                    {
+                        _repositoryFactory.Get<IUserRepository>().AddUserSubscription(user, subscription);
+                    }
+
+                    dbContextScrope.SaveChanges();
                 }
 
-                var subscription = _repositoryFactory.Get<ISubscriptionRepository>().SingleOrDefault(a => a.Id == subscriptionId);
-                if (subscription == null)
-                {
-                    throw new NotFoundException("Subscription with provided id was not found.");
-                }
-
-                if (!user.UserSubscriptions.Any(a => a.UserId == userId && a.SubscriptionId == subscriptionId))
-                {
-                    _repositoryFactory.Get<IUserRepository>().AddUserSubscription(user, subscription);
-                }
-
-                dbContextScrope.SaveChanges();
+                return true;
             }
-
-            return true;
+            catch (Exception e)
+            {
+                throw GetExceptionResponse(e);
+            }
         }
 
         public bool Delete(string id)
         {
-            using (var dbContextScrope = _dbContextScopeFactory.Create())
+            try
             {
-                var user = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(a => a.Id == id);
-                if (user == null)
+                using (var dbContextScrope = _dbContextScopeFactory.Create())
                 {
-                    throw new NotFoundException("User with provided id was not found.");
+                    var user = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(a => a.Id == id);
+                    if (user == null)
+                    {
+                        throw new NotFoundException("User with provided id was not found.");
+                    }
+
+                    _repositoryFactory.Get<IUserRepository>().Delete(user);
+
+                    dbContextScrope.SaveChanges();
                 }
-
-                _repositoryFactory.Get<IUserRepository>().Delete(user);
-
-                dbContextScrope.SaveChanges();
+                return true;
             }
-            return true;
+            catch (Exception e)
+            {
+                throw GetExceptionResponse(e);
+            }
         }
     }
 }

@@ -65,6 +65,7 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.5\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -98,7 +99,7 @@
   <ItemGroup>
     <Compile Include="App_Start\DIConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -116,6 +117,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common Layer\Rebtel.Core.Infrastructure\Rebtel.Core.Infrastructure.csproj">
+      <Project>{A83A194A-95C8-4E18-A419-68596ADE25F2}</Project>
+      <Name>Rebtel.Core.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rebtel.Client.Entities\Rebtel.Client.Entities.csproj">
       <Project>{E1FF8BEF-9F34-4BC0-AA13-2688FA32629C}</Project>
       <Name>Rebtel.Client.Entities</Name>

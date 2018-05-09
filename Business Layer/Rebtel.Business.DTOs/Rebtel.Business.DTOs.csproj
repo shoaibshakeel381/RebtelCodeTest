@@ -52,6 +52,7 @@
     <Compile Include="PropertyMappings\Subscription\SubscriptionExtensions.cs" />
     <Compile Include="PropertyMappings\User\UserConfiguration.cs" />
     <Compile Include="PropertyMappings\User\UserMappingExtensions.cs" />
+    <Compile Include="FaultResponseDTO.cs" />
     <Compile Include="Subscription DTOs\SubscriptionCreateDTO.cs" />
     <Compile Include="Subscription DTOs\SubscriptionDetailDTO.cs" />
     <Compile Include="Subscription DTOs\SubscriptionListDTO.cs" />
@@ -65,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common Layer\Rebtel.Core.Infrastructure\Rebtel.Core.Infrastructure.csproj">
+      <Project>{A83A194A-95C8-4E18-A419-68596ADE25F2}</Project>
+      <Name>Rebtel.Core.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Data Access Layer\Rebtel.Business.DataEntities\Rebtel.Business.DataEntities.csproj">
       <Project>{68CDE9D7-6F96-4EB8-87B8-8AD05F3BC4A9}</Project>
       <Name>Rebtel.Business.DataEntities</Name>

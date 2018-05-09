@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Http;
 using Rebtel.Client.Entities;
 using Rebtel.Client.ServiceContracts;
@@ -7,7 +6,7 @@ using Rebtel.Client.ServiceContracts;
 namespace Rebtel.Client.WebAPI.Controllers
 {
     [RoutePrefix("api/subscriptions")]
-    public class SubscriptionController : ApiController
+    public class SubscriptionController : BaseController
     {
         private readonly ISubscriptionService _subscriptionService;
 
@@ -18,37 +17,73 @@ namespace Rebtel.Client.WebAPI.Controllers
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<SubscriptionListDTO> Get()
+        public IHttpActionResult Get()
         {
-            return _subscriptionService.GetAll();
+            try
+            {
+                return Ok(_subscriptionService.GetAll());
+            }
+            catch (Exception e)
+            {
+                return GetExceptionResponse(e);
+            }
         }
 
         [HttpGet]
         [Route("{id}")]
-        public SubscriptionDetailDTO Get(string id)
+        public IHttpActionResult Get(string id)
         {
-            return _subscriptionService.Get(id);
+            try
+            {
+                return Ok(_subscriptionService.Get(id));
+            }
+            catch (Exception e)
+            {
+                return GetExceptionResponse(e);
+            }
         }
 
         [HttpPost]
         [Route("")]
-        public string Post([FromBody]SubscriptionCreateDTO subscription)
+        public IHttpActionResult Post([FromBody]SubscriptionCreateDTO subscription)
         {
-            return _subscriptionService.Create(subscription);
+            try
+            {
+                return Ok(_subscriptionService.Create(subscription));
+            }
+            catch (Exception e)
+            {
+                return GetExceptionResponse(e);
+            }
         }
 
         [HttpPut]
         [Route("{id}")]
-        public string Put(string id, [FromBody]SubscriptionUpdateDTO subscription)
+        public IHttpActionResult Put(string id, [FromBody]SubscriptionUpdateDTO subscription)
         {
-            subscription.Id = id;
-            return _subscriptionService.Update(subscription);
+            try
+            {
+                subscription.Id = id;
+                return Ok(_subscriptionService.Update(subscription));
+            }
+            catch (Exception e)
+            {
+                return GetExceptionResponse(e);
+            }
         }
 
         [HttpDelete, Route("{id}")]
-        public void Delete(string id)
+        public IHttpActionResult Delete(string id)
         {
-            _subscriptionService.Delete(id);
+            try
+            {
+                return Ok(_subscriptionService.Delete(id));
+            }
+            catch (Exception e)
+            {
+                return GetExceptionResponse(e);
+            }
         }
     }
 }
+

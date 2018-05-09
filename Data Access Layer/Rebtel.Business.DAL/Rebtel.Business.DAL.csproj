@@ -76,6 +76,10 @@
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common Layer\Rebtel.Core.Infrastructure\Rebtel.Core.Infrastructure.csproj">
+      <Project>{A83A194A-95C8-4E18-A419-68596ADE25F2}</Project>
+      <Name>Rebtel.Core.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rebtel.Business.DataEntities\Rebtel.Business.DataEntities.csproj">
       <Project>{68CDE9D7-6F96-4EB8-87B8-8AD05F3BC4A9}</Project>
       <Name>Rebtel.Business.DataEntities</Name>
