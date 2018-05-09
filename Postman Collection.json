@@ -1,0 +1,481 @@
+{
+	"info": {
+		"name": "Rebtel",
+		"_postman_id": "5fab0597-2702-067b-5fb7-4883937d617b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Subscription",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "Subs D",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "23.2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "PriceIncVat",
+							"value": "29.42",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "CallMinutes",
+							"value": "435",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:14666/api/subscriptions/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14666",
+					"path": [
+						"api",
+						"subscriptions",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Subscription",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "Subs A",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "23.2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "PriceIncVat",
+							"value": "29.42",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "CallMinutes",
+							"value": "435",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:14666/api/subscriptions/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14666",
+					"path": [
+						"api",
+						"subscriptions",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Subscription",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "Subs A",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "23.2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "PriceIncVat",
+							"value": "29.42",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "CallMinutes",
+							"value": "435",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:14666/api/subscriptions/cf38b9ba-06f1-4841-874f-0a470da3d2d7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14666",
+					"path": [
+						"api",
+						"subscriptions",
+						"cf38b9ba-06f1-4841-874f-0a470da3d2d7"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Subscription",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:14666/api/subscriptions/6c45354a-bd16-48c4-9404-b8279ccfbc35",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14666",
+					"path": [
+						"api",
+						"subscriptions",
+						"6c45354a-bd16-48c4-9404-b8279ccfbc35"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "Subs A",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "23.2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "PriceIncVat",
+							"value": "29.42",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "CallMinutes",
+							"value": "435",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:14666/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14666",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "Subs A",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "23.2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "PriceIncVat",
+							"value": "29.42",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "CallMinutes",
+							"value": "435",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:14666/api/users/2a5740f0-89e1-4359-a226-59a58f7c7e25",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14666",
+					"path": [
+						"api",
+						"users",
+						"2a5740f0-89e1-4359-a226-59a58f7c7e25"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "FirstName",
+							"value": "SomeUserCFName",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "LastName",
+							"value": "SomeUserCLName",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Email",
+							"value": "someuser@email.com",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:14666/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14666",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:14666/api/users/58f78d59-ff1c-46c8-8547-d548116e5f7f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14666",
+					"path": [
+						"api",
+						"users",
+						"58f78d59-ff1c-46c8-8547-d548116e5f7f"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Subscribe User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:14666/api/users/2a5740f0-89e1-4359-a226-59a58f7c7e25/b001d14b-a76f-4f3c-8a64-8b5bd5f38826",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14666",
+					"path": [
+						"api",
+						"users",
+						"2a5740f0-89e1-4359-a226-59a58f7c7e25",
+						"b001d14b-a76f-4f3c-8a64-8b5bd5f38826"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Subscription",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "Subs A",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "23.2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "PriceIncVat",
+							"value": "29.42",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "CallMinutes",
+							"value": "435",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:14666/api/subscriptions/81d390ee-41a9-4854-aa72-db09daaf01f0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14666",
+					"path": [
+						"api",
+						"subscriptions",
+						"81d390ee-41a9-4854-aa72-db09daaf01f0"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
