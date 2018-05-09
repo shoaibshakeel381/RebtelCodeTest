@@ -97,3 +97,10 @@ Contains a single project for unit testing wcf services.
 Contains a single project which is shared between WCF and WebAPI layers. It provides common exception types and generic utility classes.
 	1. **Core.Infrastructure**
 	This contains some custom exceptions and an enum for Response Codes returned by WCF services when an error occurs.
+
+------------
+
+### Building, Execution and Debugging
+Open solution in visual studio and build it. Make sure that both "Rebtel.Business.WCFHost" and "Rebtel.Client.WebAPI" are configured to run at startup during debugging. To do so right click on Solution name in Solution Explorer and select **Set Startup Project->Common Properties->Startup Project**.  Select **Multiple start projects:** and for both of these project select **Start** from action dropdown. And start debugging.
+
+I have also provided **Postman** collection configuration too. Just import it in Postman and start making requests to API.
