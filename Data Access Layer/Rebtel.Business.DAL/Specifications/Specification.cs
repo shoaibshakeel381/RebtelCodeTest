@@ -28,5 +28,10 @@ namespace Rebtel.Business.DAL.Specifications
         {
             IncludeStrings.Add(includeString);
         }
+
+        public bool IsSatisfiedBy(TEntity item)
+        {
+            return Criteria.Compile().Invoke(item);
+        }
     }
 }

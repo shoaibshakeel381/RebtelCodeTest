@@ -13,5 +13,7 @@ namespace Rebtel.Business.DAL.Specifications
         List<Expression<Func<TEntity, object>>> Includes { get; }
 
         List<string> IncludeStrings { get; }
+
+        bool IsSatisfiedBy(TEntity item);
     }
 }

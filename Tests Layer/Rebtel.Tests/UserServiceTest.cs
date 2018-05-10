@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.ServiceModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Rebtel.Business.DataEntities;
 using Rebtel.Business.DAL.Infrastructure;
+using Rebtel.Business.DAL.Specifications;
 using Rebtel.Business.DTOs;
 
 namespace Rebtel.Tests
@@ -10,72 +13,79 @@ namespace Rebtel.Tests
     public class UserServiceTest
     {
         [TestMethod]
-        public void CreateUserTest()
+        public void Test_User_Creation()
         {
             // Setup
-            var userService = Bootstraper.GetUserService();
+            var user = GetUserCreateDTOData();
+            var dbContext = new AppDbContext();
 
             // Act
-            var user = new UserCreateDTO
-            {
-                FirstName = "TestUserName",
-                LastName = "User LastName",
-                Email = "user@email.com"
-            };
-            var result = userService.Create(user);
+            var result = Bootstraper.GetUserService().Create(user);
             
             // Assert
-            var dbContext = new AppDbContext();
             Assert.IsTrue(dbContext.Users.Any(a => a.Id == result));
+
+            dbContext.Dispose();
         }
 
         [TestMethod]
-        public void GetUserTest()
+        public void Test_User_Read_And_Delete()
         {
             // Setup
-            // We First need at least one user in database
-            var userService = Bootstraper.GetUserService();
-            var userToCreate = new UserCreateDTO
-            {
-                FirstName = "TestUserName",
-                LastName = "User LastName",
-                Email = "user@email.com"
-            };
-            var result = userService.Create(userToCreate);
-
-            // Act
             var dbContext = new AppDbContext();
-            var addedUser = dbContext.Users.Single(a => a.Id == result);
+            var userToCreate = GetUserCreateDTOData();
 
-            userService = Bootstraper.GetUserService();
-            var userReturneByService = userService.Get(result);
+            //Create Test
+            var userId = Bootstraper.GetUserService().Create(userToCreate);
+            Assert.IsTrue(dbContext.Users.Any(a => a.Id == userId));
             
-            // Assert
-            Assert.IsTrue(addedUser.Id == userReturneByService.Id);
+            // Read Test
+            var userReturneByService = Bootstraper.GetUserService().Get(userId);
+            Assert.IsNotNull(userReturneByService);
+            Assert.IsTrue(userId == userReturneByService.Id);
+
+            // Delete Test
+            Assert.IsTrue(Bootstraper.GetUserService().Delete(userId));
+            Assert.IsNull(dbContext.Users.Find(userId));
+
+            dbContext.Dispose();
         }
 
         [TestMethod]
-        public void DeleteUserTest()
+        public void Test_Find_User_By_Id_Specification()
         {
-            var userService = Bootstraper.GetUserService();
+            var user = GetUserEntityData();
 
-            var user = new UserCreateDTO
+            var spec = new FindUserByIdSepecification(user.Id);
+
+            Assert.IsTrue(spec.IsSatisfiedBy(user));
+        }
+
+        [TestMethod]
+        public void Test_Reading_NonExisting_User()
+        {
+            Assert.ThrowsException<FaultException<FaultResponseDTO>>(() => Bootstraper.GetUserService().Get("invalid id"));
+        }
+
+        private UserCreateDTO GetUserCreateDTOData()
+        {
+            return new UserCreateDTO
             {
                 FirstName = "User FirstName",
                 LastName = "User LastName",
                 Email = "user@email.com"
             };
-            var result = userService.Create(user);
-            
-            userService = Bootstraper.GetUserService();
-            Assert.IsNotNull(userService.Delete(result));
         }
 
-        [TestMethod]
-        public void GetNonExistingUser()
+        private UserEntity GetUserEntityData()
         {
-            var userService = Bootstraper.GetUserService();
-            Assert.ThrowsException<FaultException<FaultResponseDTO>>(() => userService.Get("invalid id"));
+            return new UserEntity
+            {
+                Id = Guid.NewGuid().ToString(),
+                FirstName = "User FirstName",
+                LastName = "User LastName",
+                Email = "user@email.com"
+            };
         }
     }
 }
