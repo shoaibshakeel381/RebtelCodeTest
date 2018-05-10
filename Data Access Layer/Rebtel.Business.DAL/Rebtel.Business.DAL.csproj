@@ -72,6 +72,9 @@
     <Compile Include="Repositories\RepositoryFactory.cs" />
     <Compile Include="Repositories\SubscriptionRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Specifications\FindUserByIdSepecification.cs" />
+    <Compile Include="Specifications\ISpecification.cs" />
+    <Compile Include="Specifications\Specification.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common Layer\Rebtel.Core.Infrastructure\Rebtel.Core.Infrastructure.csproj">

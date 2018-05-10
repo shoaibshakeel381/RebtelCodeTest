@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
+using Rebtel.Business.DataEntities;
+using Rebtel.Business.DAL.Specifications;
 
 namespace Rebtel.Business.DAL.Repositories
 {
-    public interface IGenericRepository<TEntity> : IDisposable
-        where TEntity : class, new()
+    public interface IGenericRepository<TEntity, TKey>
+        where TEntity : BaseEntity<TKey>, new()
     {
-        #region CRUD Methods
         /// <summary>
         /// Attach entity to Db context so that it can be added
         /// to database on next database commit
@@ -25,43 +25,36 @@ namespace Rebtel.Business.DAL.Repositories
         /// <summary>
         /// Attach entity to Db context so that it can be permanentaly deleted
         /// from database on next database commit
-        /// ** WARNING - Most items should be Soft Deleted
         /// </summary>
         /// <param name="entity"></param>
         void Delete(TEntity entity);
-        #endregion
-        
-        /// <summary>
-        /// Returns the only element of a sequence that satisfies a specified condition
-        /// or a default value if no such element exists; this method throws an exception
-        /// if more than one element satisfies the condition.
-        /// </summary>
-        /// <param name="predicate">A function to test an element for a condition.</param>
-        /// <exception cref="System.ArgumentNullException">Db collection or predicate is null</exception>
-        /// <exception cref="System.InvalidOperationException">More than one element satisfies the 
-        /// condition in predicate</exception>
-        /// <returns>The single element of the input sequence that satisfies the condition in
-        /// predicate, or default(TSource) if no such element is found.</returns>
-        TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
 
         /// <summary>
         /// Returns the only element of a sequence that satisfies a specified condition
         /// or a default value if no such element exists; this method throws an exception
         /// if more than one element satisfies the condition.
         /// </summary>
-        /// <param name="predicate">A function to test an element for a condition.</param>
-        /// <param name="includes">List of Properties to Include.</param>
-        /// <exception cref="System.ArgumentNullException">Db collection or predicate is null</exception>
-        /// <exception cref="System.InvalidOperationException">More than one element satisfies the 
-        /// condition in predicate</exception>
-        /// <returns>The single element of the input sequence that satisfies the condition in
-        /// predicate, or default(TSource) if no such element is found.</returns>
-        TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate, IEnumerable<string> includes);
+        /// <param name="specification"></param>
+        /// <returns></returns>
+        TEntity SingleOrDefault(ISpecification<TEntity, TKey> specification);
+        
+        /// <summary>
+        /// Find element by its id. Will return null if more than one found.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        TEntity FindById(TKey id);
 
         /// <summary>
         /// Return all Records
         /// </summary>
         /// <returns></returns>
-        IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> ListAll();
+
+        /// <summary>
+        /// Return all Records which match provided specification
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<TEntity> ListAll(ISpecification<TEntity, TKey> specification);
     }
 }

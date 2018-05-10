@@ -27,7 +27,9 @@ namespace Rebtel.Business.DAL.Infrastructure
         public DbContextScope(DbContextScopeOption joiningOption, IsolationLevel? isolationLevel)
         {
             if (isolationLevel.HasValue && joiningOption == DbContextScopeOption.JoinExisting)
-                throw new ArgumentException("Cannot join an ambient DbContextScope when an explicit database transaction is required. When requiring explicit database transactions to be used (i.e. when the 'isolationLevel' parameter is set), you must not also ask to join the ambient context (i.e. the 'joinAmbient' parameter must be set to false).");
+                throw new ArgumentException("Cannot join an ambient DbContextScope when an explicit database transaction is required. " +
+                                            "When requiring explicit database transactions to be used (i.e. when the 'isolationLevel' parameter is set), " +
+                                            "you must not also ask to join the ambient context (i.e. the 'joinAmbient' parameter must be set to false).");
 
             _disposed = false;
             _completed = false;
@@ -52,7 +54,12 @@ namespace Rebtel.Business.DAL.Infrastructure
             if (_disposed)
                 throw new ObjectDisposedException("DbContextScope");
             if (_completed)
-                throw new InvalidOperationException("You cannot call SavePartialChanges() after SaveChanges() has been called on a DbContextScope. A DbContextScope is meant to encapsulate a business transaction: create the scope at the start of the business transaction and then call SaveChanges() at the end. Calling SaveChanges() mid-way through a business transaction doesn't make sense and most likely mean that you should refactor your service method into two separate service method that each create their own DbContextScope and each implement a single business transaction.");
+                throw new InvalidOperationException("You cannot call SavePartialChanges() after SaveChanges() has been called on a DbContextScope. " +
+                                                    "A DbContextScope is meant to encapsulate a business transaction: create the scope at the start of the " +
+                                                    "business transaction and then call SaveChanges() at the end. Calling SaveChanges() mid-way through a " +
+                                                    "business transaction doesn't make sense and most likely mean that you should refactor your " +
+                                                    "service method into two separate service method that each create their own DbContextScope and each " +
+                                                    "implement a single business transaction.");
 
             // Partial Changes can be saved even in nested scopes
             return _dbContexts.CommitPartialChanges();
@@ -328,7 +335,8 @@ Stack Trace:
         // to the DbContextScope instances we store in there, allowing them to get GCed.
         // The doc for ConditionalWeakTable isn't the best. This SO anser does a good job at explaining what 
         // it does: http://stackoverflow.com/a/18613811
-        private static readonly ConditionalWeakTable<InstanceIdentifier, DbContextScope> DbContextScopeInstances = new ConditionalWeakTable<InstanceIdentifier, DbContextScope>();
+        private static readonly ConditionalWeakTable<InstanceIdentifier, DbContextScope> DbContextScopeInstances = 
+            new ConditionalWeakTable<InstanceIdentifier, DbContextScope>();
 
         private readonly InstanceIdentifier _instanceIdentifier = new InstanceIdentifier();
 
@@ -404,7 +412,11 @@ Stack Trace:
             // the GC would be able to collect it. Once collected by the GC, our ConditionalWeakTable will return
             // null when queried for that instance. In that case, we're OK. This is a programming error 
             // but our use of a ConditionalWeakTable prevented a leak.
-            System.Diagnostics.Debug.WriteLine("Programming error detected. Found a reference to an ambient DbContextScope in the CallContext but didn't have an instance for it in our DbContextScopeInstances table. This most likely means that this DbContextScope instance wasn't disposed of properly. DbContextScope instance must always be disposed. Review the code for any DbContextScope instance used outside of a 'using' block and fix it so that all DbContextScope instances are disposed of.");
+            System.Diagnostics.Debug.WriteLine("Programming error detected. Found a reference to an ambient DbContextScope in the CallContext but didn't " +
+                                               "have an instance for it in our DbContextScopeInstances table. This most likely means that this DbContextScope " +
+                                               "instance wasn't disposed of properly. DbContextScope instance must always be disposed. Review the code for " +
+                                               "any DbContextScope instance used outside of a 'using' block and fix it so that all DbContextScope instances " +
+                                               "are disposed of.");
             return null;
         }
 

@@ -1,162 +1,83 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using Rebtel.Business.DAL.DbInfrastructure;
+using Rebtel.Business.DataEntities;
 using Rebtel.Business.DAL.Infrastructure;
+using Rebtel.Business.DAL.Specifications;
 
 namespace Rebtel.Business.DAL.Repositories
 {
-    public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
-        where TEntity : class, new()
+    public abstract class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey>
+        where TEntity : BaseEntity<TKey>, new()
     {
-        #region Protected Properties
         protected bool _disposed;
-        private readonly IAmbientDbContextLocator _ambientDbContextLocator;
-        protected AppDbContext DbContext
+        protected readonly AppDbContext _dbContext;
+
+        protected GenericRepository(AppDbContext dbContext)
         {
-            get
-            {
-                var dbContext = _ambientDbContextLocator.Get<AppDbContext>();
-                if (dbContext == null)
-                {
-                    throw new InvalidOperationException("No ambient DbContext of type AppDbContext found. This means " +
-                                                        "that this repository method has been called outside of the scope of a DbContextScope. " +
-                                                        "A repository must only be accessed within the scope of a DbContextScope, which takes care " +
-                                                        "creating the DbContext instances that the repositories need and making them available as " +
-                                                        "ambient contexts. This is what ensures that, for any given DbContext-derived type, the " +
-                                                        "same instance is used throughout the duration of a business transaction. To fix this issue, " +
-                                                        "use IDbContextScopeFactory in your top-level business logic service method to create a " +
-                                                        "DbContextScope that wraps the entire business transaction that your service method implements. " +
-                                                        "Then access this repository within that scope. Refer to the comments in the IDbContextScope.cs " +
-                                                        "file for more details.");
-                }
-
-                return dbContext;
-            }
-        }
-        #endregion
-
-        protected GenericRepository(IAmbientDbContextLocator ambientDbContextLocator)
-        {
-            _ambientDbContextLocator = ambientDbContextLocator ?? throw new ArgumentNullException(nameof(ambientDbContextLocator));
-        }
-
-        #region CRUD Methods
-        /// <summary>
-        /// Attach entity to Db context so that it can be added
-        /// to database on next database commit
-        /// </summary>
-        /// <param name="entity"></param>
-        public virtual void Create(TEntity entity)
-        {
-            DbContext.Set<TEntity>().Add(entity);
-            DbContext.Entry(entity).State = EntityState.Added;
-        }
-
-        /// <summary>
-        /// Attach entity to Db context so that it can be updated
-        /// to database on next database commit
-        /// </summary>
-        /// <param name="entity"></param>
-        public virtual void Update(TEntity entity)
-        {
-            DbContext.Set<TEntity>().Attach(entity);
-            DbContext.Entry(entity).State = EntityState.Modified;
-        }
-
-        /// <summary>
-        /// Attach entity to Db context so that it can be permanentaly deleted
-        /// from database on next database commit
-        /// ** WARNING - Most items should be Soft Deleted
-        /// </summary>
-        /// <param name="entity"></param>
-        public virtual void Delete(TEntity entity)
-        {
-            if (DbContext.Entry(entity).State == EntityState.Detached)
-            {
-                DbContext.Set<TEntity>().Attach(entity);
-            }
-
-            DbContext.Entry(entity).State = EntityState.Deleted;
+            _dbContext = dbContext;
         }
         
-        /// <summary>
-        /// Returns the only element of a sequence that satisfies a specified condition
-        /// or a default value if no such element exists; this method throws an exception
-        /// if more than one element satisfies the condition.
-        /// </summary>
-        /// <param name="predicate">A function to test an element for a condition.</param>
-        /// <exception cref="System.ArgumentNullException">Db collection or predicate is null</exception>
-        /// <exception cref="System.InvalidOperationException">More than one element satisfies the 
-        /// condition in predicate</exception>
-        /// <returns>The single element of the input sequence that satisfies the condition in
-        /// predicate, or default(TSource) if no such element is found.</returns>
-        public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
+        /// <inheritdoc cref="IGenericRepository{TEntity,TKey}.Create"/>
+        public virtual void Create(TEntity entity)
         {
-            return DbContext.Set<TEntity>().SingleOrDefault(predicate);
+            _dbContext.Set<TEntity>().Add(entity);
+            _dbContext.Entry(entity).State = EntityState.Added;
+        }
+        
+        /// <inheritdoc cref="IGenericRepository{TEntity,TKey}.Update"/>
+        public virtual void Update(TEntity entity)
+        {
+            _dbContext.Set<TEntity>().Attach(entity);
+            _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        /// <summary>
-        /// Returns the only element of a sequence that satisfies a specified condition
-        /// or a default value if no such element exists; this method throws an exception
-        /// if more than one element satisfies the condition.
-        /// </summary>
-        /// <param name="predicate">A function to test an element for a condition.</param>
-        /// <param name="includes">List of Properties to Include.</param>
-        /// <exception cref="System.ArgumentNullException">Db collection or predicate is null</exception>
-        /// <exception cref="System.InvalidOperationException">More than one element satisfies the 
-        /// condition in predicate</exception>
-        /// <returns>The single element of the input sequence that satisfies the condition in
-        /// predicate, or default(TSource) if no such element is found.</returns>
-        public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate, IEnumerable<string> includes)
+        /// <inheritdoc cref="IGenericRepository{TEntity,TKey}.Delete"/>
+        public virtual void Delete(TEntity entity)
         {
-            IQueryable<TEntity> sequence = DbContext.Set<TEntity>();
-            
-            // handle Includes
-            if (includes != null)
+            if (_dbContext.Entry(entity).State == EntityState.Detached)
             {
-                foreach (var includeProperty in includes)
-                {
-                    sequence = sequence.Include(includeProperty);
-                }
+                _dbContext.Set<TEntity>().Attach(entity);
             }
 
-            return sequence.SingleOrDefault(predicate);
+            _dbContext.Entry(entity).State = EntityState.Deleted;
         }
 
-        /// <summary>
-        /// Return all Records
-        /// </summary>
-        /// <exception cref="System.ArgumentNullException">No records found</exception>
-        /// <returns></returns>
-        public virtual IEnumerable<TEntity> GetAll()
+        /// <inheritdoc cref="IGenericRepository{TEntity,TKey}.SingleOrDefault"/>
+        public virtual TEntity SingleOrDefault(ISpecification<TEntity, TKey> specification)
         {
-            return DbContext.Set<TEntity>().ToList();
+            return List(specification).SingleOrDefault();
         }
-        #endregion
 
-        #region Dispose Methods
-        public void Dispose()
+        /// <inheritdoc cref="IGenericRepository{TEntity,TKey}.FindById"/>
+        public TEntity FindById(TKey id)
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            return _dbContext.Set<TEntity>().Find(id);
         }
 
-        protected virtual void Dispose(bool disposing)
+        /// <inheritdoc cref="IGenericRepository{TEntity,TKey}.ListAll()"/>
+        public IEnumerable<TEntity> ListAll()
         {
-            if (!_disposed && disposing)
-            {
-                //if(DbContext != null) {
-                //    DbContext.Dispose();
-                //}
-            }
-
-            _disposed = true;
+            return _dbContext.Set<TEntity>().AsEnumerable();
         }
-        #endregion
+
+        /// <inheritdoc cref="IGenericRepository{TEntity,TKey}.ListAll(Specifications.ISpecification{TEntity,TKey})"/>
+        public IEnumerable<TEntity> ListAll(ISpecification<TEntity, TKey> specification)
+        {
+            return List(specification);
+        }
+
+        protected virtual IEnumerable<TEntity> List(ISpecification<TEntity, TKey> specification)
+        {
+            // Query all results with all expression-based includes
+            var sequence = specification.Includes.Aggregate(_dbContext.Set<TEntity>().AsQueryable(),
+                (entities, expression) => entities.Include(expression));
+
+            // Update Query to handle all string-based includes
+            sequence = specification.IncludeStrings.Aggregate(sequence, (entities, includeString) => entities.Include(includeString));
+
+            // Apply Fiter Criteria and return results
+            return sequence.Where(specification.Criteria).AsEnumerable();
+        }
     }
 }

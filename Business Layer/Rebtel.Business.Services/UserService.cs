@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Rebtel.Business.DAL.Infrastructure;
 using Rebtel.Business.DAL.Repositories;
+using Rebtel.Business.DAL.Specifications;
 using Rebtel.Business.DTOs;
 using Rebtel.Business.Services.ServiceContracts;
 
@@ -32,7 +33,7 @@ namespace Rebtel.Business.Services
             {
                 using (_dbContextScopeFactory.Create())
                 {
-                    var result = _repositoryFactory.Get<IUserRepository>().GetAll();
+                    var result = _repositoryFactory.Get<IUserRepository>().ListAll();
 
                     // Mapping Phase
                     return result.ToListDTO();
@@ -51,7 +52,7 @@ namespace Rebtel.Business.Services
             {
                 using (_dbContextScopeFactory.Create())
                 {
-                    var result = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(a => a.Id == id, new List<string> { "UserSubscriptions", "UserSubscriptions.Subscription" });
+                    var result = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(new FindUserByIdSepecification(id));
                     if (result == null)
                     {
                         throw new NotFoundException("User with provided id was not found.");
@@ -100,13 +101,13 @@ namespace Rebtel.Business.Services
             {
                 using (var dbContextScrope = _dbContextScopeFactory.Create())
                 {
-                    var user = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(a => a.Id == userId, new List<string> { "UserSubscriptions" });
+                    var user = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(new FindUserByIdSepecification(userId));
                     if (user == null)
                     {
                         throw new NotFoundException("User with provided id was not found.");
                     }
 
-                    var subscription = _repositoryFactory.Get<ISubscriptionRepository>().SingleOrDefault(a => a.Id == subscriptionId);
+                    var subscription = _repositoryFactory.Get<ISubscriptionRepository>().FindById(subscriptionId);
                     if (subscription == null)
                     {
                         throw new NotFoundException("Subscription with provided id was not found.");
@@ -134,7 +135,7 @@ namespace Rebtel.Business.Services
             {
                 using (var dbContextScrope = _dbContextScopeFactory.Create())
                 {
-                    var user = _repositoryFactory.Get<IUserRepository>().SingleOrDefault(a => a.Id == id);
+                    var user = _repositoryFactory.Get<IUserRepository>().FindById(id);
                     if (user == null)
                     {
                         throw new NotFoundException("User with provided id was not found.");

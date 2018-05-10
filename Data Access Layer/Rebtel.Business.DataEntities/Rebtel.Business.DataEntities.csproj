@@ -35,6 +35,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BaseEntity.cs" />
     <Compile Include="SubscriptionEntity.cs" />
     <Compile Include="UserEntity.cs" />
     <Compile Include="UserSubscriptionEntity.cs" />

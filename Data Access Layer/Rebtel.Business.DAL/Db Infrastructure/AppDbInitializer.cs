@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using Rebtel.Business.DataEntities;
-using Rebtel.Business.DAL.DbInfrastructure;
+using Rebtel.Business.DAL.Infrastructure;
 
 namespace Rebtel.Business.DAL.Db_Infrastructure
 {

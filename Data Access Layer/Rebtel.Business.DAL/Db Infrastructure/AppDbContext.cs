@@ -8,7 +8,7 @@ using Rebtel.Business.DataEntities;
 using Rebtel.Business.DAL.Db_Infrastructure;
 using Rebtel.Business.DAL.ModelConfigurations;
 
-namespace Rebtel.Business.DAL.DbInfrastructure
+namespace Rebtel.Business.DAL.Infrastructure
 {
     public class AppDbContext : DbContext
     {

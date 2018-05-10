@@ -2,10 +2,8 @@
 
 namespace Rebtel.Business.DataEntities
 {
-    public class UserEntity
-    {
-        public string Id { get; set; }
-        
+    public class UserEntity : BaseEntity<string>
+    {   
         public string FirstName { get; set; }
         
         public string LastName { get; set; }

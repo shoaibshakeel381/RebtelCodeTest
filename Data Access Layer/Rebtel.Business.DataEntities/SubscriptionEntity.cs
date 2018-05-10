@@ -2,10 +2,8 @@
 
 namespace Rebtel.Business.DataEntities
 {
-    public class SubscriptionEntity
+    public class SubscriptionEntity : BaseEntity<string>
     {
-        public string Id { get; set; }
-
         public string Name { get; set; }
 
         public double Price { get; set; }

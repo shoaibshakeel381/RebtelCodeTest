@@ -19,7 +19,7 @@ namespace Rebtel.Tests
 
         public static IRepositoryFactory GetRepositoryFactory()
         {
-            return new RepositoryFactory(new AmbientDbContextLocator());
+            return new RepositoryFactory<AppDbContext>(new AmbientDbContextLocator());
         }
 
         public static IAmbientDbContextLocator GetAmbientDbContextLocator()

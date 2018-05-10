@@ -33,7 +33,7 @@ namespace Rebtel.Business.Services
                 IEnumerable<SubscriptionEntity> result;
                 using (_dbContextScopeFactory.Create())
                 {
-                    result = _repositoryFactory.Get<ISubscriptionRepository>().GetAll();
+                    result = _repositoryFactory.Get<ISubscriptionRepository>().ListAll();
                 }
 
                 // Mapping Phase
@@ -52,7 +52,7 @@ namespace Rebtel.Business.Services
             {
                 using (_dbContextScopeFactory.Create())
                 {
-                    var result = _repositoryFactory.Get<ISubscriptionRepository>().SingleOrDefault(a => a.Id == id);
+                    var result = _repositoryFactory.Get<ISubscriptionRepository>().FindById(id);
                     if (result == null)
                     {
                         throw new NotFoundException("Subscription with provided id was not found.");
@@ -96,7 +96,7 @@ namespace Rebtel.Business.Services
             {
                 using (var dbContextScope = _dbContextScopeFactory.Create())
                 {
-                    var result = _repositoryFactory.Get<ISubscriptionRepository>().SingleOrDefault(a => a.Id == subscription.Id);
+                    var result = _repositoryFactory.Get<ISubscriptionRepository>().FindById(subscription.Id);
                     if (result == null)
                     {
                         throw new NotFoundException("Subscription with provided id was not found.");
@@ -123,7 +123,7 @@ namespace Rebtel.Business.Services
             {
                 using (var dbContextScrope = _dbContextScopeFactory.Create())
                 {
-                    var user = _repositoryFactory.Get<ISubscriptionRepository>().SingleOrDefault(a => a.Id == id);
+                    var user = _repositoryFactory.Get<ISubscriptionRepository>().FindById(id);
                     if (user == null)
                     {
                         throw new NotFoundException("Subscription with provided id was not found.");

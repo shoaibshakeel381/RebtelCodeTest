@@ -4,10 +4,10 @@ using Rebtel.Business.DAL.Infrastructure;
 
 namespace Rebtel.Business.DAL.Repositories
 {
-    public class SubscriptionRepository : GenericRepository<SubscriptionEntity>, ISubscriptionRepository
+    public class SubscriptionRepository : GenericRepository<SubscriptionEntity, string>, ISubscriptionRepository
     {
-        public SubscriptionRepository(IAmbientDbContextLocator ambientDbContextLocator) 
-            : base(ambientDbContextLocator)
+        public SubscriptionRepository(AppDbContext dbContext) 
+            : base(dbContext)
         {
         }
 

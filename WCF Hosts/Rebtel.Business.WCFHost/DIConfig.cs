@@ -20,7 +20,7 @@ namespace Rebtel.Business.WCFHost
             // Register 
             container.Register<IDbContextScopeFactory, DbContextScopeFactory>();
             container.Register<IAmbientDbContextLocator, AmbientDbContextLocator>();
-            container.Register<IRepositoryFactory, RepositoryFactory>();
+            container.Register<IRepositoryFactory, RepositoryFactory<AppDbContext>>();
             container.Register<IUserService, UserService>();
             container.Register<ISubscriptionService, SubscriptionService>();
 
